@@ -7,17 +7,150 @@ document.addEventListener('DOMContentLoaded', () => {
     const translationResult = document.getElementById('translationResult');
     const speakBtn = document.getElementById('speakBtn');
     const loadingSpinner = document.getElementById('loadingSpinner');
+    const typingText = document.getElementById('typing-text');
 
-    // Add animation to banner icons
-    const bannerIcons = document.querySelectorAll('.banner-icon');
-    bannerIcons.forEach(icon => {
-        icon.addEventListener('mouseover', () => {
-            icon.style.transform = 'rotate(10deg)';
-        });
-        icon.addEventListener('mouseout', () => {
-            icon.style.transform = 'rotate(0deg)';
-        });
+    // Initialize particles.js
+    particlesJS.load('particles-js', {
+        "particles": {
+            "number": {
+                "value": 80,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#ffffff"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 40,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 6,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": true,
+                    "mode": "repulse"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 400,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
     });
+
+    // Typing effect
+    const phrases = [
+        "Breaking language barriers",
+        "Connecting cultures",
+        "Empowering communication",
+        "Bridging worlds through words"
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+        const currentPhrase = phrases[phraseIndex];
+        
+        if (isDeleting) {
+            typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        if (!isDeleting && charIndex === currentPhrase.length) {
+            isDeleting = true;
+            setTimeout(typeEffect, 1000);
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            setTimeout(typeEffect, 500);
+        } else {
+            setTimeout(typeEffect, isDeleting ? 50 : 100);
+        }
+    }
+
+    typeEffect();
 
     translateBtn.addEventListener('click', async () => {
         const text = inputText.value.trim();
@@ -61,5 +194,16 @@ document.addEventListener('DOMContentLoaded', () => {
             utterance.lang = lang;
             speechSynthesis.speak(utterance);
         }
+    });
+
+    // Add hover effects to icons
+    const icons = document.querySelectorAll('.banner-icon, .footer-icon');
+    icons.forEach(icon => {
+        icon.addEventListener('mouseover', () => {
+            icon.style.transform = 'scale(1.2) rotate(10deg)';
+        });
+        icon.addEventListener('mouseout', () => {
+            icon.style.transform = 'scale(1) rotate(0deg)';
+        });
     });
 });

@@ -1,17 +1,150 @@
-body {
-    background-color: #f8f9fa;
-    padding-bottom: 60px; /* Space for footer */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
 }
 
-.container {
-    background-color: white;
-    border-radius: 10px;
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.holographic-container {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    margin: 20px;
 }
 
 h1 {
-    color: #007bff;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+}
+
+.glitch {
+    position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00de;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 #00fff9, 2px 2px #ff00de;
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(90px, 9999px, 95px, 0);
+        transform: skew(0.7deg);
+    }
+    5% {
+        clip: rect(99px, 9999px, 39px, 0);
+        transform: skew(0.2deg);
+    }
+    /* ... (more keyframes) ... */
+    100% {
+        clip: rect(78px, 9999px, 3px, 0);
+        transform: skew(0.4deg);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    /* ... (keyframes for second glitch effect) ... */
+}
+
+.neon-text {
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0ff, 0 0 20px #0ff, 0 0 35px #0ff, 0 0 40px #0ff, 0 0 50px #0ff;
+}
+
+.neon-border {
+    border: 2px solid #0ff;
+    box-shadow: 0 0 5px #0ff, 0 0 10px #0ff, inset 0 0 5px #0ff, inset 0 0 10px #0ff;
+}
+
+.neon-button {
+    background-color: transparent;
+    border: 2px solid #0ff;
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff;
+    box-shadow: 0 0 5px #0ff, 0 0 10px #0ff, inset 0 0 5px #0ff;
+    transition: all 0.3s ease;
+}
+
+.neon-button:hover {
+    background-color: #0ff;
+    color: #000;
+    text-shadow: none;
+    box-shadow: 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff, 0 0 50px #0ff;
+}
+
+.banner-icon, .footer-icon {
+    height: 40px;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.glow-effect {
+    filter: drop-shadow(0 0 5px #0ff) drop-shadow(0 0 10px #0ff);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+    text-align: center;
 }
 
 #loadingSpinner {
@@ -22,51 +155,10 @@ h1 {
     z-index: 1000;
 }
 
-#translationResult {
-    background-color: #e9ecef;
-    padding: 15px;
-    border-radius: 5px;
-    min-height: 50px;
-}
-
-#speakBtn {
-    margin-top: 10px;
-}
-
-.banner {
-    background-color: #f1f3f5;
-    padding: 10px 0;
+#typing-text {
+    font-size: 1.2rem;
+    color: #0ff;
     text-align: center;
     margin-bottom: 20px;
-}
-
-.banner-icon {
-    height: 40px;
-    margin: 0 10px;
-    transition: transform 0.3s ease;
-}
-
-.banner-icon:hover {
-    transform: scale(1.1);
-}
-
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #f1f3f5;
-    padding: 10px 0;
-    text-align: center;
-}
-
-.footer-icon {
-    height: 30px;
-    margin: 0 10px;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-.footer-icon:hover {
-    opacity: 1;
+    height: 1.5em;
 }
