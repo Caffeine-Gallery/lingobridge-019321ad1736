@@ -8,6 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const speakBtn = document.getElementById('speakBtn');
     const loadingSpinner = document.getElementById('loadingSpinner');
 
+    // Add animation to banner icons
+    const bannerIcons = document.querySelectorAll('.banner-icon');
+    bannerIcons.forEach(icon => {
+        icon.addEventListener('mouseover', () => {
+            icon.style.transform = 'rotate(10deg)';
+        });
+        icon.addEventListener('mouseout', () => {
+            icon.style.transform = 'rotate(0deg)';
+        });
+    });
+
     translateBtn.addEventListener('click', async () => {
         const text = inputText.value.trim();
         const lang = targetLang.value;
