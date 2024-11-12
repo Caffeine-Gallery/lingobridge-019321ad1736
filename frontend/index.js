@@ -200,10 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const icons = document.querySelectorAll('.banner-icon, .footer-icon');
     icons.forEach(icon => {
         icon.addEventListener('mouseover', () => {
-            icon.style.transform = 'scale(1.2) rotate(10deg)';
+            icon.style.transform = 'scale(1.2)';
         });
         icon.addEventListener('mouseout', () => {
-            icon.style.transform = 'scale(1) rotate(0deg)';
+            icon.style.transform = 'scale(1)';
         });
     });
 });
