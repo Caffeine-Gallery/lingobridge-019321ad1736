@@ -1,0 +1,3 @@
+service : {
+  translate: (text, text) -> (text);
+}
